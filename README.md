@@ -25,7 +25,7 @@ To castle, select the King, and select the position the King would be in after c
 
 To take a pawn en passant, simply move the piece diagonally behind the pawn to be taken.
 
-![The black pawn can take the white pawn en passant](/readme_images/enpassant1.png?raw=true "En passant capture")
+![The black pawn can take the white pawn en passant](/readme_images/enpassant.png?raw=true "En passant capture")
 
 ![The black pawn has taken the white pawn en passant](/readme_images/enpassant2.png?raw=true "En passant capture")
 
