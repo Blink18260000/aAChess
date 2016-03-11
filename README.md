@@ -1,5 +1,5 @@
 # aAChess
-Two day chess project built in Ruby.
+aAChess is a two day chess project built entirely in Ruby. Start a game by running "ruby game.rb" in the aAChess directory.
 
 Begin by putting in both player's names.
 
