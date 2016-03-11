@@ -84,10 +84,10 @@ end
 
 if __FILE__ == $PROGRAM_NAME
   system("clear")
-  print("Player 1 name?\n")
+  print("Enter name for player 1 (white):\n")
   player1name = gets.chomp
   system("clear")
-  print("Player 2 name?\n")
+  print("Enter name for player 2 (black):\n")
   player2name = gets.chomp
   the_game = Game.new(player1name, player2name)
   the_game.play
