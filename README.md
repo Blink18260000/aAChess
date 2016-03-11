@@ -29,4 +29,10 @@ To take a pawn en passant, simply move the piece diagonally behind the pawn to b
 
 ![The black pawn has taken the white pawn en passant](/readme_images/enpassant2.png?raw=true "En passant capture")
 
+Pawns will automatically become queens upon reaching the opponents back row.
+
+![The white pawn is ready to promote](/readme_images/promotion1.png?raw=true "Pawn Promotion")
+
+![The white pawn has been promoted to a queen](/readme_images/promotion2.png?raw=true "Pawn Promotion")
+
 The fazibear/colorize gem was used to color the board, cursor, and move highlighter.
