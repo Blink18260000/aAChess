@@ -17,41 +17,21 @@ class Display
     system("clear")
     print " \\  a  b  c  d  e  f  g  h \n"
 
-    grid.each_with_index do |row, ind1| # TODO refractor to smaller methods
+    grid.each_with_index do |row, ind1|
       print " #{8-ind1} "
       row.each_with_index do |tile, ind2|
         print_square(current_color, ind1, ind2, tile)
-
         if ind2 < 7
           current_color = current_color == :white ? :black : :white
         else
           if ind1 == 1
-            print "   "
-            lost = []
-            piece_list[:white].each do |piece|
-              unless piece.alive
-                lost << piece
-              end
-            end
-            lost.each do |dead_piece|
-              print " #{dead_piece.to_chr} "
-            end
+            print_taken_white_pieces(piece_list)
           end
           if ind1 == 3
-            print "   "
-            lost = []
-            piece_list[:black].each do |piece|
-              unless piece.alive
-                lost << piece
-              end
-            end
-            lost.each do |dead_piece|
-              print " #{dead_piece.to_chr} ".colorize(:background => :white)
-            end
+            print_taken_black_pieces(piece_list)
           end
           print "\n"
         end
-
       end
     end
   end
@@ -68,11 +48,37 @@ class Display
 
   def to_square(piece, color)
     if piece
-      return " #{piece.to_chr} ".colorize(:background => :light_black) if color == :white
+      return " #{piece.to_chr} ".colorize(:background => :light_magenta) if color == :white
       return " #{piece.to_chr} ".colorize(:background => :light_blue)
     else
-      return "   ".colorize(:background => :light_black) if color == :white
+      return "   ".colorize(:background => :light_magenta) if color == :white
       return "   ".colorize(:background => :light_blue)
+    end
+  end
+
+  def print_taken_white_pieces(piece_list)
+    print "   "
+    lost = []
+    piece_list[:white].each do |piece|
+      unless piece.alive
+        lost << piece
+      end
+    end
+    lost.each do |dead_piece|
+      print " #{dead_piece.to_chr} "
+    end
+  end
+
+  def print_taken_black_pieces(piece_list)
+    print "   "
+    lost = []
+    piece_list[:black].each do |piece|
+      unless piece.alive
+        lost << piece
+      end
+    end
+    lost.each do |dead_piece|
+      print " #{dead_piece.to_chr} ".colorize(:background => :white)
     end
   end
 

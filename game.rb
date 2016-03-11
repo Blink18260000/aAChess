@@ -35,29 +35,20 @@ class Game
   end
 
   def take_turn
-    valid_move = false
+    @valid_move = false
     test_board = []
-    until valid_move # TODO refactor
+    until @valid_move
       @display.render_board(@board.grid, @board.piece_list)
-      puts "#{@current_player.color.to_s.capitalize}\'s turn."
-      selected = @display.get_input
-      if selected
-        if @display.valid_moves.include?(selected)
-          valid_move = true
-          @board.move(@selected_position, selected)
-          opponents_color = @current_player.color == :white ? :black : :white
-          return @current_player.color if @board.checkmate?(opponents_color)
-        elsif selected && ((@board.grid[selected[0]][selected[1]].nil?) || (@board.grid[selected[0]][selected[1]].color != @current_player.color))
-          @display.valid_moves = []
-          @selected_position = nil
-        elsif
-          @display.valid_moves = @board.grid[selected[0]][selected[1]].valid_moves
-          @selected_position = selected
-          @display.valid_moves.reject! do |move|
-            test_board = @board.dup
-            test_board.move(@selected_position.dup, move)
-            test_board.check?(@current_player.color)
-          end
+      puts "#{@current_player.name.to_s.capitalize}\'s turn."
+      @selected = @display.get_input
+      if @selected
+        if @display.valid_moves.include?(@selected)
+          result = make_move
+          return result if result
+        elsif @selected && ((@board.grid[@selected[0]][@selected[1]].nil?) || (@board.grid[@selected[0]][@selected[1]].color != @current_player.color))
+          deselect
+        else
+          select_piece
         end
       end
     end
@@ -66,9 +57,38 @@ class Game
     @selected_position = nil
   end
 
+  def make_move
+    @valid_move = true
+    @board.move(@selected_position, @selected)
+    opponents_color = @current_player.color == :white ? :black : :white
+    return @current_player.color if @board.checkmate?(opponents_color)
+    nil
+  end
+
+  def deselect
+    @display.valid_moves = []
+    @selected_position = nil
+  end
+
+  def select_piece
+    @display.valid_moves = @board.grid[@selected[0]][@selected[1]].valid_moves
+    @selected_position = @selected
+    @display.valid_moves.reject! do |move|
+      test_board = @board.dup
+      test_board.move(@selected_position.dup, move)
+      test_board.check?(@current_player.color)
+    end
+  end
+
 end
 
 if __FILE__ == $PROGRAM_NAME
-  the_game = Game.new("Eric", "Rynan")
+  system("clear")
+  print("Player 1 name?\n")
+  player1name = gets.chomp
+  system("clear")
+  print("Player 2 name?\n")
+  player2name = gets.chomp
+  the_game = Game.new(player1name, player2name)
   the_game.play
 end

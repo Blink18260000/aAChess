@@ -1,7 +1,7 @@
 require_relative "diag_module.rb"
-require_relative "horz_module.rb" # TODO rename file to match orth
+require_relative "orth_module.rb"
 
-class Piece # TODO create SlidingPiece < Piece and SteppingPiece < Piece classes
+class Piece
   include Orth_module
   include Diag_module
 
@@ -25,10 +25,6 @@ class Piece # TODO create SlidingPiece < Piece and SteppingPiece < Piece classes
     new_piece.has_moved = @has_moved
     new_piece.alive = @alive
     new_piece
-  end
-
-  def pretty_print # TODO remove when done testing
-    ["Type = #{self.class}", "Color = #{@color}", "Position = #{@position}", "Has Moved = #{@has_moved}", "Alive = #{@alive}"]
   end
 
 end
